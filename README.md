@@ -9,7 +9,7 @@
 ## 项目结构
 ```
 rag_project
-├─datas  # 存放数据
+├─datas                     # 存放数据
     ├─processed             # 存放已处理好的数据和索引
     ├─raw                   # 存放原始数据
 ├─src                       # 核心功能代码
@@ -44,7 +44,7 @@ python persist.py
 启动项目
 ```
 fastapi dev
-通过http：//127.0.0.1:8000 访问ask接口
+通过http://127.0.0.1:8000 访问ask接口
 ```
 
 
