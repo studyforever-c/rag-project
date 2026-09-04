@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from src.embed import EmbeddingModel
 from src.llm import llm
-app = FastAPI(title = '基于RAG的企业知识库问答助手')
+app = FastAPI(title = '基于RAG的本地知识库问答助手')
 
 class AskRequest(BaseModel):
     question: str
