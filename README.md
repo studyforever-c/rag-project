@@ -11,18 +11,18 @@
 rag_project
 ├─datas                     # 存放数据
     ├─processed             # 存放已处理好的数据和索引
-    ├─raw                   # 存放原始数据
+    └─raw                   # 存放原始数据
 ├─src                       # 核心功能代码
     ├─chunk.py              # 文本切分函数
     ├─embed.py              # 嵌入模型的初始化类
     ├─llm.py                # 调用生成模型获得回答
-    ├─parse.py              # 文档解析函数
+    └─parse.py              # 文档解析函数
 ├─.env                      # 存放调用生成模型的api_key和base_url
 ├─app.py                    # 项目的启动文件
 ├─config.py                 # 配置文件
 ├─persist.py                # faiss持久化
 ├─.gitignore
-├─requirement.txt           # 项目运行所需依赖
+└─requirement.txt           # 项目运行所需依赖
 ```
 
 ## 快速开始
@@ -31,6 +31,8 @@ rag_project
 ```
 pip install -r requirement.txt
 ```
+
+修改config.py文件
 
 将要处理的文件存放在rag_project/datas/raw文件夹
 
@@ -44,7 +46,8 @@ python persist.py
 启动项目
 ```
 fastapi dev
-通过http://127.0.0.1:8000 访问ask接口
 ```
+
+通过http://127.0.0.1:8000/docs 访问ask接口
 
 
