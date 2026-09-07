@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import uuid
 from config import ASK
 
 st.title('基于RAG的本地知识库问答系统')
