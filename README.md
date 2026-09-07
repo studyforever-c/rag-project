@@ -5,6 +5,7 @@
 - 向量化
 - faiss检索
 - llm生成回答
+- streamlit页面持续问答，随页面刷新重开对话
 
 ## 项目结构
 ```
@@ -18,11 +19,13 @@ rag_project
     ├─llm.py                # 调用生成模型获得回答
     └─parse.py              # 文档解析函数
 ├─.env                      # 存放调用生成模型的api_key和base_url
-├─app.py                    # 项目的启动文件
+├─app.py                    # fastapi的启动文件
 ├─config.py                 # 配置文件
 ├─persist.py                # faiss持久化
+├─ui.py                     # streamlit启动文件
+├─pydantic_models.py        # 定义的pydantic类，方便之后在其他文件复用
 ├─.gitignore
-└─requirement.txt           # 项目运行所需依赖
+└─requirements.txt           # 项目运行所需依赖
 ```
 
 ## 快速开始
@@ -43,11 +46,13 @@ pip install -r requirement.txt
 python persist.py
 ```
 
-启动项目
+启动fastapi
 ```
 fastapi dev
 ```
 
-通过http://127.0.0.1:8000/docs 访问ask接口
-
+启动streamlit，运行指令后自动打开页面
+```
+streamlit run ui.py
+```
 
