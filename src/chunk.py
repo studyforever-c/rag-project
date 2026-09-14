@@ -3,15 +3,15 @@ from transformers import AutoTokenizer
 from modelscope import snapshot_download
 from config import LOCAL_MODEL_ID, LOCAL_MODEL_PATH
 
-
-def chunking(text: str, max_token: int = 600, overlap: int = 150) -> list[str]:
-    # 切分函数
-    model = snapshot_download(
+model = snapshot_download(
         model_id=LOCAL_MODEL_ID,
         local_dir=LOCAL_MODEL_PATH
     )
-    # 定义分词器，用于确定一段文本会被切分的token数
-    tokenizer = AutoTokenizer.from_pretrained(model)
+# 定义分词器，用于确定一段文本会被切分的token数
+tokenizer = AutoTokenizer.from_pretrained(model)
+
+def chunking(text: str, max_token: int = 600, overlap: int = 150) -> list[str]:
+    """切分函数"""
 
     cleaned = re.sub(r'\s+', ' ', text)
     sentences = [sentence.strip()

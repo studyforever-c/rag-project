@@ -3,6 +3,8 @@
 LOCAL_MODEL_ID = 'sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2'
 LOCAL_MODEL_PATH = r'D:\big_mantou_tools\transformers_models\models\paraphrase-multilingual-MiniLM-L12-v2'
 
-# streamlit与fastapi交互配置
-FASTAPI_BASE_URL = 'http://localhost:8000/'
-ASK = FASTAPI_BASE_URL + 'ask'
+# 使用的线上嵌入模型名称
+Online_Model = 'qwen3.7-text-embedding-flash'
+
+# 线上嵌入模型的指定维度，sentence-transformers无法指定维度
+Dimension = 1024
