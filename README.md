@@ -58,7 +58,7 @@ pip install -r requirement.txt
 
 构建向量数据库（仅本地知识库需要）
 ```
-python persist.py
+python -m src.persist
 ```
 
 启动fastapi
