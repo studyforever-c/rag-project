@@ -10,6 +10,7 @@ from commons.prompts import system_prompt, user_prompt
 from faiss import IndexFlatIP
 from src.hybrid_search import hybrid_search
 from rank_bm25 import BM25Okapi
+from src.rerank import rerank
 
 router = APIRouter()
 local_embedding_model = get_local_embedding_model()
@@ -32,24 +33,25 @@ history = [{'role': 'system', 'content': system_prompt}]
 show_history = []
 @router.post('/local_base')
 async def local_base(ask_request: AskRequest) -> AskResponse:
-    question_embedding = np.array(local_embedding_model.get_embedding([ask_request.question])).astype('f4')
-    faiss.normalize_L2(question_embedding)
     # D, I = index.search(question_embedding, k = ask_request.top_k)
-    I = hybrid_search(ask_request.question,
-                      bm25,
-                      index)
+
     context = []
     # for i in I[0]:
     #     if i == -1:
     #         continue
     #     context.append(documents[i]['content'])
+
+    question = ask_request.question
+    may_need = []  # 混合检索之后获得的documents
+    I = hybrid_search(question, bm25, index)
     for i in I:
-        context.append(documents[i]['content'])
-    content = '内容'+'\n'.join(context)
+        may_need.append(documents[i])
+        
+    context = rerank(question, may_need)
 
     # 大模型需知道参考内容，用户只需看到问题
     history.append({'role': 'user',
-                    'content': user_prompt.format(context = content, question = ask_request.question)})
+                    'content': user_prompt.format(context = context, question = ask_request.question)})
     show_history.append({'role': 'user',
                     'content': ask_request.question})
 

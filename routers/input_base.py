@@ -1,6 +1,7 @@
 from fastapi import APIRouter, UploadFile, File
 from src.temp_file import temp_file
 from src.persist import persist
+from src.rerank import rerank
 from commons.prompts import system_prompt, user_prompt
 from commons.pydantic_models import AskRequest, AskResponse
 from faiss import IndexFlatIP
@@ -42,22 +43,29 @@ history = [{'role': 'system', 'content': system_prompt}]
 show_history = []
 @router.post('/input_base')
 async def input_base(ask_request: AskRequest) -> AskResponse:
-    context = []
-
+    question = ask_request.question
+    may_need = []  # 混合检索之后获得的documents
     if index is not None:
-        I = hybrid_search(ask_request.question,
-                          bm25,
-                          index)
+        I = hybrid_search(question, bm25, index)
         for i in I:
-            context.append(documents[i]['content'])
+            may_need.append(documents[i])
+    context = rerank(question, may_need)
+
+# 不使用重排序
+#     context = []
+#     if index is not None:
+#         I = hybrid_search(question, bm25, index)
+#     for i in I:
+#         context.append(documents[i]['content'])
+
     history.append({'role': 'user',
                     'content': user_prompt.format(context=context, question=ask_request.question)})
     show_history.append({'role': 'user',
                          'content': ask_request.question})
     answer = llm(history)
-    history.append({'role': 'user',
+    history.append({'role': 'assistant',
                     'content': answer})
-    show_history.append({'role': 'user',
+    show_history.append({'role': 'assistant',
                          'content': answer})
     return AskResponse(
         history = show_history
@@ -72,4 +80,4 @@ async def renew():
     documents.clear()
     embeddings.clear()
     index = None
-    bm25 = BM25Okapi([])
+    bm25 = None
