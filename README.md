@@ -30,6 +30,7 @@ rag_project
 ├─src                       # 核心功能代码
     ├─chunk.py              # 文本切分函数
     ├─embed.py              # 嵌入模型的初始化类
+    ├─hybrid_search.py      # 混合检索实现
     ├─llm.py                # 调用生成模型获得回答
     ├─models.py             # 管理模型对象
     ├─parse.py              # 文档解析函数
