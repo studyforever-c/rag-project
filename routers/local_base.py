@@ -1,3 +1,4 @@
+import jieba
 import numpy as np
 import faiss
 import json
@@ -7,6 +8,8 @@ from src.models import get_local_embedding_model
 from src.llm import llm
 from commons.prompts import system_prompt, user_prompt
 from faiss import IndexFlatIP
+from src.hybrid_search import hybrid_search
+from rank_bm25 import BM25Okapi
 
 router = APIRouter()
 local_embedding_model = get_local_embedding_model()
@@ -14,6 +17,11 @@ local_embedding_model = get_local_embedding_model()
 index = faiss.read_index('datas/processed/index/index1.index')
 with open('datas/processed/content/content1.json', 'r', encoding = 'utf-8') as f:
     documents = json.load(f)
+
+bm25 = BM25Okapi(
+    jieba.lcut(doc['content'])
+    for doc in documents
+)
 
 """
 history是投喂给大模型的信息，show_history是展示给用户的信息，
@@ -26,15 +34,17 @@ show_history = []
 async def local_base(ask_request: AskRequest) -> AskResponse:
     question_embedding = np.array(local_embedding_model.get_embedding([ask_request.question])).astype('f4')
     faiss.normalize_L2(question_embedding)
-    D, I = index.search(question_embedding, k = ask_request.top_k)
+    # D, I = index.search(question_embedding, k = ask_request.top_k)
+    I = hybrid_search(ask_request.question,
+                      bm25,
+                      index)
     context = []
-    source = []
-    for i in I[0]:
-        if i == -1:
-            continue
+    # for i in I[0]:
+    #     if i == -1:
+    #         continue
+    #     context.append(documents[i]['content'])
+    for i in I:
         context.append(documents[i]['content'])
-        source.append(documents[i]['source'])
-    source = list(set(source))
     content = '内容'+'\n'.join(context)
 
     # 大模型需知道参考内容，用户只需看到问题

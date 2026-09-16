@@ -33,7 +33,7 @@ class EmbeddingModel:
         if not self.is_api:
             return self.model.encode(
                 inputs = text,
-                normalize_embeddings = True,
+                normalize_embeddings = True
             ).tolist()
         else:
             ret = []
@@ -46,7 +46,7 @@ class EmbeddingModel:
                     for item in dashscope.TextEmbedding.call(
                         model = self.model_name,
                         input = text[head:tail],
-                        dimension = Dimension
+                        dimension = Dimension,
                     ).output['embeddings']
                 ])
             return ret

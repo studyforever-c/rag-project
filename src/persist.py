@@ -9,7 +9,7 @@ from src.chunk import chunking
 from config import Dimension
 
 local_embedding_model = get_local_embedding_model()
-online_embedding_model = get_online_embedding_model()
+# online_embedding_model = get_online_embedding_model()
 
 def persist(path: str,
             is_dir: bool,
@@ -39,7 +39,9 @@ def persist(path: str,
     else:
         content = extract_file_text(path)
         chunks = chunking(content)
-        embeddings.extend(online_embedding_model.get_embedding(chunks))
+        # embeddings.extend(online_embedding_model.get_embedding(chunks))
+        embeddings.extend(local_embedding_model.get_embedding(chunks))
+
         for chunk in chunks:
             documents.append({
                 'id': i,
@@ -83,6 +85,6 @@ if __name__ == '__main__':
         'datas/raw',
         True,
         True,
-        'index1.index',
-        'content1.json',
+        'index2.index',
+        'content2.json',
     )
