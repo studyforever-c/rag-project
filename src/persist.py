@@ -25,8 +25,8 @@ def persist(path: str,
     if is_dir:
         for root, _, files in os.walk(path):
             for file in files:
-                path = os.path.join(root, file)
-                content = extract_file_text(path)
+                file = os.path.join(root, file)
+                content = extract_file_text(file)
                 chunks = chunking(content)
                 embeddings.extend(local_embedding_model.get_embedding(chunks))
                 for chunk in chunks:
@@ -60,11 +60,11 @@ def persist(path: str,
         index.add(np.array(embeddings).astype('f4'))
 
         # 确保文件存储位置存在
-        os.makedirs('../datas/processed/index', exist_ok = True)
-        os.makedirs('../datas/processed/content/', exist_ok = True)
+        os.makedirs('datas/processed/index', exist_ok = True)
+        os.makedirs('datas/processed/content/', exist_ok = True)
 
-        index_path = os.path.join('../datas/processed/index', index_file_name)
-        content_path = os.path.join('../datas/processed/content', content_file_name)
+        index_path = os.path.join('datas/processed/index', index_file_name)
+        content_path = os.path.join('datas/processed/content', content_file_name)
 
 
         faiss.write_index(index, index_path)
@@ -82,7 +82,7 @@ def persist(path: str,
 # 构建本地知识库使用
 if __name__ == '__main__':
     persist(
-        'datas/raw',
+        r'datas\raw',
         True,
         True,
         'index2.index',
