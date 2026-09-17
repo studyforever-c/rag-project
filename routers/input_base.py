@@ -5,6 +5,7 @@ from src.rerank import rerank
 from commons.prompts import system_prompt, user_prompt
 from commons.pydantic_models import AskRequest, AskResponse
 from faiss import IndexFlatIP
+from src.rewrite import rewrite
 # from config import Dimension # 本地模型不适用
 from src.llm import llm
 from rank_bm25 import BM25Okapi
@@ -43,7 +44,7 @@ history = [{'role': 'system', 'content': system_prompt}]
 show_history = []
 @router.post('/input_base')
 async def input_base(ask_request: AskRequest) -> AskResponse:
-    question = ask_request.question
+    question = rewrite(ask_request.question, history)
     may_need = []  # 混合检索之后获得的documents
     if index is not None:
         I = hybrid_search(question, bm25, index)
@@ -59,7 +60,7 @@ async def input_base(ask_request: AskRequest) -> AskResponse:
 #         context.append(documents[i]['content'])
 
     history.append({'role': 'user',
-                    'content': user_prompt.format(context=context, question=ask_request.question)})
+                    'content': user_prompt.format(context=context, question=question)})
     show_history.append({'role': 'user',
                          'content': ask_request.question})
     answer = llm(history)

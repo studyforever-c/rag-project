@@ -8,3 +8,5 @@ Online_Model = 'qwen3.7-text-embedding-flash'
 
 # 线上嵌入模型的指定维度，sentence-transformers无法指定维度
 Dimension = 1024
+
+# 用于问题重写的线上模型

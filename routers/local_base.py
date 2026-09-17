@@ -11,6 +11,7 @@ from faiss import IndexFlatIP
 from src.hybrid_search import hybrid_search
 from rank_bm25 import BM25Okapi
 from src.rerank import rerank
+from src.rewrite import rewrite
 
 router = APIRouter()
 local_embedding_model = get_local_embedding_model()
@@ -41,7 +42,7 @@ async def local_base(ask_request: AskRequest) -> AskResponse:
     #         continue
     #     context.append(documents[i]['content'])
 
-    question = ask_request.question
+    question = rewrite(ask_request.question, history)
     may_need = []  # 混合检索之后获得的documents
     I = hybrid_search(question, bm25, index)
     for i in I:
@@ -51,7 +52,7 @@ async def local_base(ask_request: AskRequest) -> AskResponse:
 
     # 大模型需知道参考内容，用户只需看到问题
     history.append({'role': 'user',
-                    'content': user_prompt.format(context = context, question = ask_request.question)})
+                    'content': user_prompt.format(context = context, question = question)})
     show_history.append({'role': 'user',
                     'content': ask_request.question})
 
@@ -69,5 +70,3 @@ async def renew():
     history.clear()
     history.append({'role': 'system', 'content': system_prompt})
     show_history.clear()
-    documents.clear()
-    index = IndexFlatIP(index.d)
