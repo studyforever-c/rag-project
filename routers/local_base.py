@@ -16,8 +16,8 @@ from src.rewrite import rewrite
 router = APIRouter()
 local_embedding_model = get_local_embedding_model()
 
-index = faiss.read_index('datas/processed/index/index1.index')
-with open('datas/processed/content/content1.json', 'r', encoding = 'utf-8') as f:
+index = faiss.read_index('datas/processed/index/index.index')
+with open('datas/processed/content/content.json', 'r', encoding = 'utf-8') as f:
     documents = json.load(f)
 
 bm25 = BM25Okapi(

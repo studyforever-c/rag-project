@@ -85,6 +85,6 @@ if __name__ == '__main__':
         r'datas\raw',
         True,
         True,
-        'index2.index',
-        'content2.json',
+        'index.index',
+        'content.json',
     )
