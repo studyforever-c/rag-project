@@ -35,6 +35,8 @@ rag_project
     ├─models.py             # 管理模型对象
     ├─parse.py              # 文档解析函数
     ├─persist.py            # faiss持久化
+    ├─rerank.py             # 重排序实现
+    ├─rewrite.py            # 问题重写实现
     └─temp_file.py          # 构造临时文件
     
 ├─.env                      # 存放调用生成模型的api_key和base_url
