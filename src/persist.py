@@ -2,10 +2,12 @@ import os
 import faiss
 import json
 import numpy as np
+import re
 
 from src.models import get_local_embedding_model, get_online_embedding_model
 from src.parse import extract_file_text
-from src.chunk import chunking
+from src.chunk import chunking, law_chunk
+from pathlib import Path
 from config import Dimension
 
 local_embedding_model = get_local_embedding_model()
@@ -21,27 +23,21 @@ def persist(path: str,
     # 获取文本
     documents = []
     embeddings = []
-    i = 0
     if is_dir:
         for root, _, files in os.walk(path):
             for file in files:
                 file = os.path.join(root, file)
                 content = extract_file_text(file)
-                chunks = chunking(content)
+                os.rename(file, os.path.join('datas/processed/origin', Path(file).name))
+                documents.extend(law_chunk(content, file))
+                chunks = [doc['content'] for doc in documents]
                 embeddings.extend(local_embedding_model.get_embedding(chunks))
-                for chunk in chunks:
-                    documents.append({
-                        'id': i,
-                        'content': chunk,
-                        'source': file
-                    })
-                    i += 1
     else:
         content = extract_file_text(path)
         chunks = chunking(content)
         # embeddings.extend(online_embedding_model.get_embedding(chunks))
         embeddings.extend(local_embedding_model.get_embedding(chunks))
-
+        i = 0
         for chunk in chunks:
             documents.append({
                 'id': i,
@@ -81,10 +77,15 @@ def persist(path: str,
 
 # 构建本地知识库使用
 if __name__ == '__main__':
+    path = r'datas\raw'
+    label = 0
+    for file in os.walk(os.path.join(path, 'index')):
+        label = max(label, re.search(r'\d+', str(file)).group())
+    label += 1
     persist(
         r'datas\raw',
         True,
         True,
-        'index2.index',
-        'content2.json',
+        f'index_{label}.index',
+        f'content_{label}.json',
     )

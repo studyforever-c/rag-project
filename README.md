@@ -3,10 +3,13 @@
 ## 功能介绍
 - 读取文件，切分
 - 向量化
-- faiss检索
+- 混合检索
+- 重排序
+- 问题重写
 - llm生成回答
 - streamlit页面多轮对话
 - 上传文件作为知识库
+- 测评
 
 ## 项目结构
 ```
@@ -16,7 +19,11 @@ rag_project
     └─pydantic_model        # pydantic模型
 ├─datas                     # 存放数据
     ├─processed             # 存放已处理好的数据和索引
+        ├─content           # 切分的文档
+        ├─index             # 索引
+        └─origin            # 已经处理好的源文件    
     └─raw                   # 存放原始数据
+├─eval                      # 测评相关
 ├─main                      # 前后端启动文件
     ├─__init__.py           # 声明，否则启动指令识别不了
     ├─app.py                # fastapi启动
@@ -73,3 +80,17 @@ fastapi dev main/app.py
 streamlit run main/ui.py
 ```
 
+## 测评
+
+根据测试QA对生成回答
+```
+python -m evals.retrieve_and_generate
+```
+检索测评
+```
+python -m evals.retrieve_test
+```
+生成测评
+```
+python -m evals.generate_test
+```

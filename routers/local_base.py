@@ -1,13 +1,11 @@
 import jieba
-import numpy as np
 import faiss
 import json
-from commons.pydantic_models import AskRequest, AskResponse
+from commons.pydantic_models import AskRequest
 from fastapi import APIRouter
 from src.models import get_local_embedding_model
 from src.llm import llm
 from commons.prompts import system_prompt, user_prompt
-from faiss import IndexFlatIP
 from src.hybrid_search import hybrid_search
 from rank_bm25 import BM25Okapi
 from src.rerank import rerank
@@ -16,8 +14,8 @@ from src.rewrite import rewrite
 router = APIRouter()
 local_embedding_model = get_local_embedding_model()
 
-index = faiss.read_index('datas/processed/index/index1.index')
-with open('datas/processed/content/content1.json', 'r', encoding = 'utf-8') as f:
+index = faiss.read_index('datas/processed/index/index_1.index')
+with open('datas/processed/content/content_1.json', 'r', encoding = 'utf-8') as f:
     documents = json.load(f)
 
 bm25 = BM25Okapi(
@@ -33,7 +31,7 @@ history是投喂给大模型的信息，show_history是展示给用户的信息�
 history = [{'role': 'system', 'content': system_prompt}]
 show_history = []
 @router.post('/local_base')
-async def local_base(ask_request: AskRequest) -> AskResponse:
+async def local_base(ask_request: AskRequest):
     # D, I = index.search(question_embedding, k = ask_request.top_k)
 
     context = []
@@ -42,14 +40,13 @@ async def local_base(ask_request: AskRequest) -> AskResponse:
     #         continue
     #     context.append(documents[i]['content'])
 
-    question = rewrite(ask_request.question, history)
+    question = "为这个句子生成表示以用于检索相关文章:" + rewrite(ask_request.question, history)
     may_need = []  # 混合检索之后获得的documents
     I = hybrid_search(question, bm25, index)
     for i in I:
         may_need.append(documents[i])
-        
-    context = rerank(question, may_need)
-
+    context = '\n'.join([f'资料{item['content']}, 来源：{item['source']}'
+               for item in rerank(question, may_need)])
     # 大模型需知道参考内容，用户只需看到问题
     history.append({'role': 'user',
                     'content': user_prompt.format(context = context, question = question)})
@@ -60,9 +57,12 @@ async def local_base(ask_request: AskRequest) -> AskResponse:
     history.append({'role': 'assistant', 'content': answer})
     show_history.append({'role': 'assistant', 'content': answer})
 
-    return AskResponse(
-        history = show_history
-    )
+    may_need = [doc['content'] for doc in may_need]
+    return {
+        'history': show_history,
+        'context': context,
+        'may_need': may_need
+    }
 
 @router.post('/renew')
 async def renew():

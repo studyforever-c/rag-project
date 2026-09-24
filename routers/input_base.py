@@ -44,7 +44,7 @@ history = [{'role': 'system', 'content': system_prompt}]
 show_history = []
 @router.post('/input_base')
 async def input_base(ask_request: AskRequest) -> AskResponse:
-    question = rewrite(ask_request.question, history)
+    question = "为这个句子生成表示以用于检索相关文章:" + rewrite(ask_request.question, history)
     may_need = []  # 混合检索之后获得的documents
     if index is not None:
         I = hybrid_search(question, bm25, index)

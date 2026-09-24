@@ -12,8 +12,8 @@ embedding_model = get_local_embedding_model()
 def hybrid_search(question: str,
                   bm25: BM25Okapi|None,
                   index: IndexFlatIP,
-                  k: int = 30,
-                  callback: int = 50) -> list[int]:
+                  k: int = 40,
+                  callback: int = 60) -> list[int]:
     question_embedding = np.array(embedding_model.get_embedding([question])).astype('f4')
     
     # 稠密检索
