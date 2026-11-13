@@ -1,0 +1,376 @@
+[
+  {
+    "query": "买卖不破租赁",
+    "expected_articles": [
+      "725"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "租赁合同登记备案有什么影响",
+    "expected_articles": [
+      "706"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "不动产物权变动什么时候生效",
+    "expected_articles": [
+      "209"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "房屋出租人出卖房屋，承租人有什么权利",
+    "expected_articles": [
+      "726"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "善意取得需要满足什么条件",
+    "expected_articles": [
+      "311"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "预告登记有什么效力",
+    "expected_articles": [
+      "221"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "居住权怎么设立",
+    "expected_articles": [
+      "368"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "租赁合同怎么定义",
+    "expected_articles": [
+      "703"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "承租人转租需要经过出租人同意吗",
+    "expected_articles": [
+      "716"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "承租人拖欠租金出租人怎么办",
+    "expected_articles": [
+      "722"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "抵押前已经出租并占有，租赁关系受影响吗",
+    "expected_articles": [
+      "405"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "合同无效后财产怎么返还",
+    "expected_articles": [
+      "157"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "格式条款什么情况下不成为合同内容",
+    "expected_articles": [
+      "496"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "无民事行为能力人实施的民事法律行为效力如何",
+    "expected_articles": [
+      "144"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "诉讼时效是多久",
+    "expected_articles": [
+      "188"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "不动产抵押权什么时候设立",
+    "expected_articles": [
+      "402"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "租赁物毁损灭失承租人可以不付租金吗",
+    "expected_articles": [
+      "729"
+    ],
+    "difficulty": "easy"
+  },
+  {
+    "query": "房东把租出去的房子卖了，租客还能继续住吗",
+    "expected_articles": [
+      "725",
+      "726"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "房东要卖房，需要提前告诉租客吗",
+    "expected_articles": [
+      "726"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "我把房子过户了但没登记，房子算谁的",
+    "expected_articles": [
+      "209",
+      "214"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "买了个房子结果卖家根本不是房主，我能取得所有权吗",
+    "expected_articles": [
+      "311"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "买房时房东说房子租出去了，这种情况怎么处理",
+    "expected_articles": [
+      "725",
+      "708"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "租的房子漏水了，谁来修",
+    "expected_articles": [
+      "712",
+      "713"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "房东能不能随便进租出去的房子",
+    "expected_articles": [
+      "708",
+      "703"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "承租人可以随便把房子转租给别人吗",
+    "expected_articles": [
+      "716",
+      "717"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "抵押的房子出租出去，抵押权实现时租约还有效吗",
+    "expected_articles": [
+      "405"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "签合同时对方给我看的条款我没注意到，能不算数吗",
+    "expected_articles": [
+      "496",
+      "497"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "卖家隐瞒房子有问题，合同能撤销吗",
+    "expected_articles": [
+      "148",
+      "500"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "租期到了我还住着，原来的租约还有效吗",
+    "expected_articles": [
+      "734"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "承租人死了，他家人还能继续租吗",
+    "expected_articles": [
+      "732"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "房东把租约卖给别人了，新房东能赶我走吗",
+    "expected_articles": [
+      "725"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "买卖合同里的东西有第三人主张权利怎么办",
+    "expected_articles": [
+      "612",
+      "613"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "买东西付了钱但对方不交货，我能解除合同吗",
+    "expected_articles": [
+      "563",
+      "577"
+    ],
+    "difficulty": "medium"
+  },
+  {
+    "query": "甲把出租的房屋卖给乙并完成过户，丙是承租人且一直住在房子里，乙能要求丙搬走吗",
+    "expected_articles": [
+      "725",
+      "726"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "出租人交付的房屋有质量问题导致承租人无法正常使用，承租人该怎么办",
+    "expected_articles": [
+      "708",
+      "712",
+      "724"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "承租人未经出租人同意转租，出租人发现后可以怎么做",
+    "expected_articles": [
+      "716",
+      "719"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "抵押物在抵押前已经出租并交付承租人占有，后来抵押权人要实现抵押权，承租人的租赁权还受保护吗",
+    "expected_articles": [
+      "405",
+      "725"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "出卖人交付的标的物被第三人主张权利，买受人有哪些救济途径",
+    "expected_articles": [
+      "612",
+      "613",
+      "614"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "合同一方不履行义务，另一方可以主张哪些违约责任",
+    "expected_articles": [
+      "577",
+      "583",
+      "584"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "合同约定的违约金过高，当事人可以请求调整吗",
+    "expected_articles": [
+      "585"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "承租人擅自改变租赁物的用途造成损坏，出租人有什么权利",
+    "expected_articles": [
+      "711"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "租赁合同到期后承租人继续使用房屋，出租人没有提出异议，原合同效力如何",
+    "expected_articles": [
+      "734"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "出租人未履行通知义务就出卖房屋，承租人如何主张优先购买权受到侵害的赔偿",
+    "expected_articles": [
+      "726",
+      "500"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "因不可归责于承租人的原因租赁物全部毁损灭失，承租人和出租人的权利义务如何变化",
+    "expected_articles": [
+      "729",
+      "730"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "买受人取得动产所有权后，发现出卖人就该动产又设立担保物权，买受人如何保护自己的权利",
+    "expected_articles": [
+      "311",
+      "403"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "租赁期间租赁物被司法机关查封扣押，承租人可以解除合同吗",
+    "expected_articles": [
+      "724",
+      "725"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "当事人约定租赁期限届满租赁物归承租人所有，承租人已付大部分租金但无力支付剩余租金，出租人解除合同后租赁物价值超过欠款的如何处理",
+    "expected_articles": [
+      "758"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "出租人出卖租赁房屋未在合理期限内通知承租人，承租人能否请求出租人承担赔偿责任",
+    "expected_articles": [
+      "726",
+      "577"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "承租人经催告后仍不支付租金，出租人可以要求一次性付清全部租金吗",
+    "expected_articles": [
+      "752"
+    ],
+    "difficulty": "hard"
+  },
+  {
+    "query": "因第三人主张权利致使承租人无法使用租赁物，承租人可以主张减少租金吗",
+    "expected_articles": [
+      "723"
+    ],
+    "difficulty": "hard"
+  }
+]

@@ -4,8 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 client = OpenAI()
 
-def llm(history: list[dict], model: str = 'qwen3-vl-flash'):
-
+def llm(history: list[dict], model: str = 'qwen3.8-max'):
 
     completions = client.chat.completions.create(
         model = model,

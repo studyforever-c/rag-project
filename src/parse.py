@@ -21,16 +21,19 @@ def extract_pdf_text(path: str) -> str:
                 text.append(page_text)
     return '\n'.join(text)
 
-def extract_word_text(path: str) -> str:
+def extract_word_text(path: str) -> list[str]:
     doc = Document(path)
-    text = []
+    paragraphs = []
     for para in doc.paragraphs:
         para_text = para.text.strip()
-        if para_text:
-            text.append(para_text)
-    return '\n'.join(text)
+        para_text = para_text.replace('\u3000', ' ')
+        para_text = para_text.replace(r'\s+', ' ')
 
-def extract_file_text(path: str) -> str:
+        if para_text:
+            paragraphs.append(para_text)
+    return paragraphs
+
+def extract_file_text(path: str) -> str|list[str]:
 # 根据文件类型决定提取文件的方法
     if path.endswith('.md'):
         return extract_md_text(path)

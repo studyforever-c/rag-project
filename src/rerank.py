@@ -10,7 +10,7 @@ rerank_model = CrossEncoder(model)
 
 def rerank(question: str,
                     may_need: list[dict],
-                    k: int = 10) -> list[str]:
+                    k: int = 15) -> list[dict]:
     pairs = [
         (question, doc['content'])
         for doc in may_need
@@ -21,9 +21,5 @@ def rerank(question: str,
     for i, doc in enumerate(may_need):
         doc['rerank_score'] = rerank_scores[i]
 
-    contexts = []
-
     may_need.sort(key = lambda x: x['rerank_score'], reverse = True)
-    for item in may_need[: k]:
-        contexts.append(item['content'])
-    return contexts
+    return may_need[: k]
